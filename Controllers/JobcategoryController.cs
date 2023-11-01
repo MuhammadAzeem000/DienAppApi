@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Jobcategory
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Jobcategory>>> GetJobcategories()
+        public async Task<ActionResult<IEnumerable<Jobcategory>>> GetAllJobcategories()
         {
             return await _context.Jobcategories.ToListAsync();
         }
 
         // GET: api/Jobcategory/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Jobcategory>> GetJobcategory(int id)
+        public async Task<ActionResult<Jobcategory>> GetJobcategoryById(int id)
         {
             var jobcategory = await _context.Jobcategories.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Jobcategory/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutJobcategory(int id, Jobcategory jobcategory)
+        public async Task<IActionResult> UpdateJobcategoryById(int id, Jobcategory jobcategory)
         {
             if (id != jobcategory.Jobcategoryid)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Jobcategory
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Jobcategory>> PostJobcategory(Jobcategory jobcategory)
+        public async Task<ActionResult<Jobcategory>> CreateJobcategory(Jobcategory jobcategory)
         {
             _context.Jobcategories.Add(jobcategory);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Jobcategory/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteJobcategory(int id)
+        public async Task<IActionResult> DeleteJobcategoryById(int id)
         {
             var jobcategory = await _context.Jobcategories.FindAsync(id);
             if (jobcategory == null)

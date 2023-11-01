@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Jobrequest
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Jobrequest>>> GetJobrequests()
+        public async Task<ActionResult<IEnumerable<Jobrequest>>> GetAllJobrequests()
         {
             return await _context.Jobrequests.ToListAsync();
         }
 
         // GET: api/Jobrequest/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Jobrequest>> GetJobrequest(int id)
+        public async Task<ActionResult<Jobrequest>> GetJobrequestById(int id)
         {
             var jobrequest = await _context.Jobrequests.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Jobrequest/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutJobrequest(int id, Jobrequest jobrequest)
+        public async Task<IActionResult> UpdateJobrequestById(int id, Jobrequest jobrequest)
         {
             if (id != jobrequest.Jobrequestid)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Jobrequest
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Jobrequest>> PostJobrequest(Jobrequest jobrequest)
+        public async Task<ActionResult<Jobrequest>> CreateJobrequest(Jobrequest jobrequest)
         {
             _context.Jobrequests.Add(jobrequest);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Jobrequest/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteJobrequest(int id)
+        public async Task<IActionResult> DeleteJobrequesById(int id)
         {
             var jobrequest = await _context.Jobrequests.FindAsync(id);
             if (jobrequest == null)

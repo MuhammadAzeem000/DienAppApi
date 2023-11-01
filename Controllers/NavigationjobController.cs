@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Navigationjob
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Navigationjob>>> GetNavigationjobs()
+        public async Task<ActionResult<IEnumerable<Navigationjob>>> GetAllNavigationjobs()
         {
             return await _context.Navigationjobs.ToListAsync();
         }
 
         // GET: api/Navigationjob/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Navigationjob>> GetNavigationjob(int id)
+        public async Task<ActionResult<Navigationjob>> GetNavigationjobById(int id)
         {
             var navigationjob = await _context.Navigationjobs.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Navigationjob/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNavigationjob(int id, Navigationjob navigationjob)
+        public async Task<IActionResult> UpdateNavigationjobById(int id, Navigationjob navigationjob)
         {
             if (id != navigationjob.NavigationjobId)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Navigationjob
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Navigationjob>> PostNavigationjob(Navigationjob navigationjob)
+        public async Task<ActionResult<Navigationjob>> CreateNavigationjob(Navigationjob navigationjob)
         {
             _context.Navigationjobs.Add(navigationjob);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Navigationjob/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNavigationjob(int id)
+        public async Task<IActionResult> DeleteNavigationjobById(int id)
         {
             var navigationjob = await _context.Navigationjobs.FindAsync(id);
             if (navigationjob == null)

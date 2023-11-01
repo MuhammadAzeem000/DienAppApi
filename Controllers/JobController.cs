@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Job
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Job>>> GetJobs()
+        public async Task<ActionResult<IEnumerable<Job>>> GetAllJobs()
         {
             return await _context.Jobs.ToListAsync();
         }
 
         // GET: api/Job/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Job>> GetJob(int id)
+        public async Task<ActionResult<Job>> GetJobById(int id)
         {
             var job = await _context.Jobs.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Job/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutJob(int id, Job job)
+        public async Task<IActionResult> UpdateJobById(int id, Job job)
         {
             if (id != job.Jobid)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Job
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Job>> PostJob(Job job)
+        public async Task<ActionResult<Job>> CreateJob(Job job)
         {
             _context.Jobs.Add(job);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Job/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteJob(int id)
+        public async Task<IActionResult> DeleteJobById(int id)
         {
             var job = await _context.Jobs.FindAsync(id);
             if (job == null)

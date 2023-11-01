@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Managmentcompany
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Managmentcompany>>> GetManagmentcompanies()
+        public async Task<ActionResult<IEnumerable<Managmentcompany>>> GetAllManagmentcompanies()
         {
             return await _context.Managmentcompanies.ToListAsync();
         }
 
         // GET: api/Managmentcompany/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Managmentcompany>> GetManagmentcompany(int id)
+        public async Task<ActionResult<Managmentcompany>> GetManagmentcompanyById(int id)
         {
             var managmentcompany = await _context.Managmentcompanies.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Managmentcompany/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutManagmentcompany(int id, Managmentcompany managmentcompany)
+        public async Task<IActionResult> UpdateManagmentcompanyById(int id, Managmentcompany managmentcompany)
         {
             if (id != managmentcompany.ManagmentId)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Managmentcompany
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Managmentcompany>> PostManagmentcompany(Managmentcompany managmentcompany)
+        public async Task<ActionResult<Managmentcompany>> CreateManagmentcompany(Managmentcompany managmentcompany)
         {
             _context.Managmentcompanies.Add(managmentcompany);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Managmentcompany/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteManagmentcompany(int id)
+        public async Task<IActionResult> DeleteManagmentcompanyById(int id)
         {
             var managmentcompany = await _context.Managmentcompanies.FindAsync(id);
             if (managmentcompany == null)

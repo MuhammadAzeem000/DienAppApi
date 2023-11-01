@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Rate
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rate>>> GetRates()
+        public async Task<ActionResult<IEnumerable<Rate>>> GetAllRates()
         {
             return await _context.Rates.ToListAsync();
         }
 
         // GET: api/Rate/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Rate>> GetRate(int id)
+        public async Task<ActionResult<Rate>> GetRateById(int id)
         {
             var rate = await _context.Rates.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Rate/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRate(int id, Rate rate)
+        public async Task<IActionResult> UpdateRateById(int id, Rate rate)
         {
             if (id != rate.Rateid)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Rate
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rate>> PostRate(Rate rate)
+        public async Task<ActionResult<Rate>> CreateRate(Rate rate)
         {
             _context.Rates.Add(rate);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Rate/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRate(int id)
+        public async Task<IActionResult> DeleteRatebyId(int id)
         {
             var rate = await _context.Rates.FindAsync(id);
             if (rate == null)

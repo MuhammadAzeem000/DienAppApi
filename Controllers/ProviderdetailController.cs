@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Providerdetail
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Providerdetail>>> GetProviderdetails()
+        public async Task<ActionResult<IEnumerable<Providerdetail>>> GetAllProviderdetails()
         {
             return await _context.Providerdetails.ToListAsync();
         }
 
         // GET: api/Providerdetail/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Providerdetail>> GetProviderdetail(int id)
+        public async Task<ActionResult<Providerdetail>> GetProviderdetailById(int id)
         {
             var providerdetail = await _context.Providerdetails.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Providerdetail/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProviderdetail(int id, Providerdetail providerdetail)
+        public async Task<IActionResult> UpdateProviderdetailById(int id, Providerdetail providerdetail)
         {
             if (id != providerdetail.Providerdetailsid)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Providerdetail
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Providerdetail>> PostProviderdetail(Providerdetail providerdetail)
+        public async Task<ActionResult<Providerdetail>> CreateProviderdetail(Providerdetail providerdetail)
         {
             _context.Providerdetails.Add(providerdetail);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Providerdetail/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProviderdetail(int id)
+        public async Task<IActionResult> DeleteProviderdetailById(int id)
         {
             var providerdetail = await _context.Providerdetails.FindAsync(id);
             if (providerdetail == null)

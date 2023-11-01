@@ -23,14 +23,14 @@ namespace DienappApi.Controllers
 
         // GET: api/Provideremployee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Provideremployee>>> GetProvideremployees()
+        public async Task<ActionResult<IEnumerable<Provideremployee>>> GetAllProvideremployees()
         {
             return await _context.Provideremployees.ToListAsync();
         }
 
         // GET: api/Provideremployee/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Provideremployee>> GetProvideremployee(int id)
+        public async Task<ActionResult<Provideremployee>> GetProvideremployeeById(int id)
         {
             var provideremployee = await _context.Provideremployees.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace DienappApi.Controllers
         // PUT: api/Provideremployee/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProvideremployee(int id, Provideremployee provideremployee)
+        public async Task<IActionResult> UpdateProvideremployeeById(int id, Provideremployee provideremployee)
         {
             if (id != provideremployee.Provideremployeeid)
             {
@@ -76,7 +76,7 @@ namespace DienappApi.Controllers
         // POST: api/Provideremployee
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Provideremployee>> PostProvideremployee(Provideremployee provideremployee)
+        public async Task<ActionResult<Provideremployee>> CreateProvideremployee(Provideremployee provideremployee)
         {
             _context.Provideremployees.Add(provideremployee);
             try
@@ -100,7 +100,7 @@ namespace DienappApi.Controllers
 
         // DELETE: api/Provideremployee/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProvideremployee(int id)
+        public async Task<IActionResult> DeleteProvideremployeeById(int id)
         {
             var provideremployee = await _context.Provideremployees.FindAsync(id);
             if (provideremployee == null)
