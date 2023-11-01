@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DienappApi.Data;
 using DienappApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DienappApi.Controllers
 {
@@ -22,14 +23,14 @@ namespace DienappApi.Controllers
         }
 
         // GET: api/Job
-        [HttpGet]
+        [HttpGet , Authorize]
         public async Task<ActionResult<IEnumerable<Job>>> GetAllJobs()
         {
             return await _context.Jobs.ToListAsync();
         }
 
         // GET: api/Job/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}") , Authorize]
         public async Task<ActionResult<Job>> GetJobById(int id)
         {
             var job = await _context.Jobs.FindAsync(id);
