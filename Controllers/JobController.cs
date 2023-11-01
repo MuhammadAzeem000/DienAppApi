@@ -45,7 +45,8 @@ namespace DienappApi.Controllers
         // PUT: api/Job/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateJobById(int id, Job job)
+        public async Task<IActionResult> UpdateJobById(int id,
+                        Job job)
         {
             if (id != job.Jobid)
             {
@@ -76,7 +77,8 @@ namespace DienappApi.Controllers
         // POST: api/Job
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Job>> CreateJob(Job job)
+        public async Task<ActionResult<Job>> CreateJob(Job
+                            job)
         {
             _context.Jobs.Add(job);
             try
@@ -95,7 +97,8 @@ namespace DienappApi.Controllers
                 }
             }
 
-            return CreatedAtAction("GetJob", new { id = job.Jobid }, job);
+            return CreatedAtAction("GetJob", new { id = job.Jobid },
+                            job);
         }
 
         // DELETE: api/Job/5
