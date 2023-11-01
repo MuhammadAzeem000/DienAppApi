@@ -5,41 +5,41 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-        using DienappApi.Data;
-        using DienappApi.Models;
+using DienappApi.Data;
+using DienappApi.Models;
 
 namespace DienappApi.Controllers
 {
-[Route("api/[controller]/[action]")]
-[ApiController]
-public class RateController : ControllerBase
-{
-private readonly DIENAPPRESTAPIContext _context;
-
-public RateController(DIENAPPRESTAPIContext context)
-{
-_context = context;
-}
-
-// GET: api/Rate
-[HttpGet]
-public async Task<ActionResult<IEnumerable<Rate>>> GetAllRates()
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class RateController : ControllerBase
     {
-    return await _context.Rates.ToListAsync();
-    }
+        private readonly DIENAPPRESTAPIContext _context;
 
-    // GET: api/Rate/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Rate>> GetRateById(int id)
+        public RateController(DIENAPPRESTAPIContext context)
         {
-        var rate = await _context.Rates.FindAsync(id);
-
-        if (rate == null)
-        {
-        return NotFound();
+            _context = context;
         }
 
-        return rate;
+        // GET: api/Rate
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Rate>>> GetAllRates()
+        {
+            return await _context.Rates.ToListAsync();
+        }
+
+        // GET: api/Rate/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Rate>> GetRateById(int id)
+        {
+            var rate = await _context.Rates.FindAsync(id);
+
+            if (rate == null)
+            {
+                return NotFound();
+            }
+
+            return rate;
         }
 
         // PUT: api/Rate/5
@@ -47,79 +47,79 @@ public async Task<ActionResult<IEnumerable<Rate>>> GetAllRates()
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRateById(int id,
                         Rate rate)
-            {
+        {
             if (id != rate.Rateid)
             {
-            return BadRequest();
+                return BadRequest();
             }
 
             _context.Entry(rate).State = EntityState.Modified;
 
             try
             {
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-            if (!RateExists(id))
-            {
-            return NotFound();
-            }
-            else
-            {
-            throw;
-            }
+                if (!RateExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
             return NoContent();
+        }
+
+        // POST: api/Rate
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Rate>> CreateRate(Rate
+                            rate)
+        {
+            _context.Rates.Add(rate);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (RateExists(rate.Rateid))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            // POST: api/Rate
-            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-            [HttpPost]
-            public async Task<ActionResult<Rate>> CreateRate(Rate
-                                rate)
-                {
-                _context.Rates.Add(rate);
-                                        try
-                                        {
-                                        await _context.SaveChangesAsync();
-                                        }
-                                        catch (DbUpdateException)
-                                        {
-                                        if (RateExists(rate.Rateid))
-                                        {
-                                        return Conflict();
-                                        }
-                                        else
-                                        {
-                                        throw;
-                                        }
-                                        }
+            return CreatedAtAction("GetRate", new { id = rate.Rateid },
+                            rate);
+        }
 
-                return CreatedAtAction("GetRate", new { id = rate.Rateid },
-                                rate);
-                }
+        // DELETE: api/Rate/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRateById(int id)
+        {
+            var rate = await _context.Rates.FindAsync(id);
+            if (rate == null)
+            {
+                return NotFound();
+            }
 
-                // DELETE: api/Rate/5
-                [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteRateById(int id)
-                    {
-                    var rate = await _context.Rates.FindAsync(id);
-                    if (rate == null)
-                    {
-                    return NotFound();
-                    }
+            _context.Rates.Remove(rate);
+            await _context.SaveChangesAsync();
 
-                    _context.Rates.Remove(rate);
-                    await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
-                    return NoContent();
-                    }
-
-                    private bool RateExists(int id)
-                    {
-                    return _context.Rates.Any(e => e.Rateid == id);
-                    }
-                    }
-                    }
+        private bool RateExists(int id)
+        {
+            return _context.Rates.Any(e => e.Rateid == id);
+        }
+    }
+}
