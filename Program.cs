@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using DienappApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,7 @@ options =>
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddIdentityApiEndpoints<Register>()
     .AddEntityFrameworkStores<DIENAPPRESTAPIContext>();
 
 var app = builder.Build();
