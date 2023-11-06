@@ -1,11 +1,12 @@
 ﻿using DienappApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DienappApi.Models.SPModels;
 
 
 namespace DienappApi.Data;
 
-public partial class DIENAPPRESTAPIContext : IdentityDbContext
+public partial class DIENAPPRESTAPIContext : IdentityDbContext<Register>
 {
     public DIENAPPRESTAPIContext(DbContextOptions<DIENAPPRESTAPIContext> options)
         : base(options)
@@ -13,6 +14,8 @@ public partial class DIENAPPRESTAPIContext : IdentityDbContext
     }
 
     public virtual DbSet<Job> Jobs { get; set; }
+
+    public virtual DbSet<GetAllJobs> GetAllJobs { get; set; }
 
     public virtual DbSet<Jobcategory> Jobcategories { get; set; }
 
@@ -36,6 +39,8 @@ public partial class DIENAPPRESTAPIContext : IdentityDbContext
 
     public virtual DbSet<Seeker> Seekers { get; set; }
 
+    public virtual DbSet<Register> Registers { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -43,6 +48,12 @@ public partial class DIENAPPRESTAPIContext : IdentityDbContext
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
+
+        modelBuilder.Entity<Register>()
+        .Property(e => e.Name)
+        .HasMaxLength(100);
+
+        modelBuilder.Entity<GetAllJobs>(entity => entity.HasKey(e => e.Jobid));
 
         modelBuilder.Entity<Job>(entity =>
         {

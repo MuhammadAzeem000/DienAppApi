@@ -78,8 +78,7 @@ namespace DienappApi.Controllers
         // POST: api/Job
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Job>> CreateJob(Job
-                            job)
+        public async Task<ActionResult<Job>> CreateJob(Job job)
         {
             _context.Jobs.Add(job);
             try

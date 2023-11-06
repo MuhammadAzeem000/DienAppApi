@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -32,6 +31,7 @@ options =>
 
 
 builder.Services.AddAuthorization();
+
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<DIENAPPRESTAPIContext>();
 
