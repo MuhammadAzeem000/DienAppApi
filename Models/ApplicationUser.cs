@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DienappApi.Models
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
-    public class Register : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        [Required]
-        [MaxLength(100)]
         public string Name { get; set; } = string.Empty;
 
     }

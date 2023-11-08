@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DienappApi.Models.SPModels;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace DienappApi.Data;
 
-public partial class DIENAPPRESTAPIContext : IdentityDbContext<Register>
+public partial class DIENAPPRESTAPIContext : IdentityDbContext<ApplicationUser>
 {
     public DIENAPPRESTAPIContext(DbContextOptions<DIENAPPRESTAPIContext> options)
         : base(options)
@@ -39,17 +41,18 @@ public partial class DIENAPPRESTAPIContext : IdentityDbContext<Register>
 
     public virtual DbSet<Seeker> Seekers { get; set; }
 
-    public virtual DbSet<Register> Registers { get; set; }
+    public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        SeedRole(modelBuilder);
 
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Register>()
+        modelBuilder.Entity<ApplicationUser>()
         .Property(e => e.Name)
         .HasMaxLength(100);
 
@@ -475,4 +478,14 @@ public partial class DIENAPPRESTAPIContext : IdentityDbContext<Register>
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    private void SeedRole(ModelBuilder builder)
+    {
+        builder.Entity<IdentityRole>().HasData
+        (
+            new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "ADMIN" },
+            new IdentityRole() { Name = "Provider", ConcurrencyStamp = "2", NormalizedName = "PROVIDER" },
+            new IdentityRole() { Name = "Seeker", ConcurrencyStamp = "3", NormalizedName = "SEEKER" }
+        );
+    }
 }
